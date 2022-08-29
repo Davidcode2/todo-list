@@ -1,0 +1,151 @@
+@font-face {
+	font-family: 'PlayfairDisplay';
+	src: url('../fonts/PlayfairDisplay-Regular.ttf');
+}
+
+* {
+	padding: 0px;
+	margin: 0px;
+	font-family: 'PlayFairDisplay';
+	box-sizing: border-box;
+}
+
+html {
+	background-image: url('../img/arch_scene.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+::selection {
+	background: snow;
+}
+
+header {
+	display: grid;
+	grid-template: 51px 1fr / 1fr;
+	position: sticky;
+	top: 0;
+}
+
+li::selection {
+	background: snow;
+}
+
+header > nav > ul {
+	display: flex;
+	justify-content: end;
+}
+li {
+	margin: 10px;
+	padding: 5px;
+	list-style:none;
+	text-justify: center;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	cursor: pointer;
+	transition-property: border;
+	transition-duration: 0.3s;
+}
+li:hover {
+	border-top: 1px solid darkgoldenrod;
+	border-bottom: 1px solid darkgoldenrod;
+}
+li:focus {
+	color: darkgoldenrod;
+}
+
+.hero {
+	display: grid;
+	grid-template: 1fr / 1fr 3fr 1fr;
+	justify-items: center;
+	align-items: center;
+}
+
+.hero > h1 {
+	padding: clamp(10px, 10%, 50px) clamp(10px, 10%, 50px) 260px clamp(10px, 10%, 50px);
+	margin-left: 25px;
+	background-color: RGBA(255, 250, 250, 0.15);
+}
+
+.hero-text {
+	width: clamp(100px, 60%, 500px);
+	text-align:center;
+}
+
+.tile-content {
+	margin-left: 100px;
+	margin-right: 100px;
+	grid-column-start: 2;
+	display: grid;
+	gap: 50px;
+	justify-items: center;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.main-content-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	margin-bottom: 40px;
+}
+
+.lnBreak {
+	height: 1rem;
+}
+
+span {
+	background-color: snow;
+}
+span::selection {
+	background-color: darkgoldenrod;
+	color: black;
+}
+
+.contactInfo {
+	grid-column-start: 2;
+	text-align: center;
+}
+
+.hero > img {
+	width: 100%;
+}
+
+.dishImg-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.dish-title {
+	text-align: center;
+	padding: 0px;
+	flex: 1;
+	align-self: center;
+}
+
+.dishImg {
+	width: 150px;
+	flex: 2;
+}
+
+@media screen and (max-width: 500px) {
+	.hero {
+	display: grid;
+	grid-template: 1fr / 1fr;
+	gap: 20px;
+	justify-items: center;
+	align-items: center;
+	}
+  .hero > h1 {
+	margin: 0px;
+	}
+	.tile-content {
+		margin-top: 20px;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+.tile-content {
+	grid-template-columns: repeat(3, minmax(100px, 1fr));
+}
+}
+
+
