@@ -14,6 +14,7 @@ html {
 	background-image: url('../img/arch_scene.jpg');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+  background-size: cover;
 }
 
 ::selection {
