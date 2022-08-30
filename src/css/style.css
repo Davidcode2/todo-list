@@ -32,6 +32,12 @@ li::selection {
 	background: snow;
 }
 
+header > div {
+  height: 50px;
+  padding: 20px;
+  background: white;
+}
+
 header > nav > ul {
 	display: flex;
 	justify-content: end;
@@ -93,6 +99,10 @@ li:focus {
 	height: 1rem;
 }
 
+.projectAddButton {
+  padding: 7px;
+}
+
 span {
 	background-color: snow;
 }
@@ -104,6 +114,12 @@ span::selection {
 .contactInfo {
 	grid-column-start: 2;
 	text-align: center;
+}
+
+.card {
+  padding: 24px;
+  background-color: white;
+  border: 1px solid black;
 }
 
 .hero > img {

@@ -1,6 +1,7 @@
-import './styles/style.css';
+import './css/style.css';
 import { Project } from './scripts/project';
-import './scripts/todo';
+import { Todo } from './scripts/todo';
+import './scripts/projectView';
 
 let body = document.querySelector("body");
 let content = document.createElement("div");
@@ -10,7 +11,7 @@ body.appendChild(content);
 content.innerHTML = "This is inside of content";
 
 let myProject = new Project("testproject");
-let myTodo = myProject.createTodo("transcend");
+let myTodo = new Todo("mop floor");
 myProject.addTodo(myTodo);
 
 console.log(myProject.Todos);
