@@ -12,7 +12,7 @@ export class Todo {
   private priority: Priority;
   private notes: string;
 
-  constructor(title: string, description?: string, dueDate?: Date, priority?: Priority, notes?: string) {
+  constructor(title: string, description?: string, dueDate?: Date, priority: Priority = 2, notes?: string) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
