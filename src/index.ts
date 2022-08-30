@@ -9,7 +9,7 @@ content.id = "content";
 body.appendChild(content);
 content.innerHTML = "This is inside of content";
 
-let myProject = new Project();
+let myProject = new Project("testproject");
 let myTodo = myProject.createTodo("transcend");
 myProject.addTodo(myTodo);
 
