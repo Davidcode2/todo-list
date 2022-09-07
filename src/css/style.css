@@ -1,12 +1,12 @@
 @font-face {
-	font-family: 'PlayfairDisplay';
-	src: url('../fonts/PlayfairDisplay-Regular.ttf');
+	font-family: FiraCodeMedium;
+	src: url('../fonts/Fira Code Medium Nerd Font Complete Mono.ttf');
 }
 
 * {
 	padding: 0px;
 	margin: 0px;
-	font-family: 'PlayFairDisplay';
+	font-family: 'FiraCodeMedium';
 	box-sizing: border-box;
 }
 
@@ -34,7 +34,6 @@ li::selection {
 
 header > div {
   height: 50px;
-  padding: 20px;
   background: white;
 }
 
@@ -59,6 +58,19 @@ li:hover {
 }
 li:focus {
 	color: darkgoldenrod;
+}
+
+.deleteProjectTabButton {
+  padding: 10px;
+  color: black;
+  background-color: transparent;
+  border: none;
+  align-self: center;
+  margin-left: 20px;
+}
+
+.deleteProjectTabButton::after {
+  content: " ";
 }
 
 .hero {
@@ -100,7 +112,21 @@ li:focus {
 }
 
 .projectAddButton {
-  padding: 7px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  order: 2;
+  background-color: lightgrey;
+  border: 1px solid aquamarine;
+  border-radius: 20px;
+
+}
+.projectAddButton::before {
+  content: "";
+}
+
+.projectTabs {
+  display: flex;
 }
 
 span {
@@ -116,10 +142,14 @@ span::selection {
 	text-align: center;
 }
 
-.card {
-  padding: 24px;
+.tab {
+  display: flex;
+  padding: 0 0 0 24px ;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid lightgrey;
+  border-radius: 20px;
+  text-align: center;
+  align-items: center;
 }
 
 .hero > img {
