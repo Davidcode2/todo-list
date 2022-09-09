@@ -60,6 +60,11 @@ li:focus {
 	color: darkgoldenrod;
 }
 
+main {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr
+}
+
 .deleteProjectTabButton {
   padding: 10px;
   color: black;
@@ -111,7 +116,7 @@ li:focus {
 	height: 1rem;
 }
 
-.projectAddButton {
+.addButton {
   display: flex;
   align-items: center;
   padding: 20px;
@@ -121,8 +126,18 @@ li:focus {
   border-radius: 20px;
 
 }
-.projectAddButton::before {
+
+.addButton::before {
   content: "";
+}
+
+.addTodoButton {
+  grid-column-start: 3;
+  align-self: end;
+  justify-self: end;
+  position: sticky;
+  bottom: 0;
+  right: 0;
 }
 
 .projectTabs {
@@ -152,42 +167,99 @@ span::selection {
   align-items: center;
 }
 
-.hero > img {
+
+form > div {
+	display: flex;
+	flex-flow: column wrap;
+	width: max(50%, 250px);
+	padding-right: 10vw;
+}
+
+form {
+	display: flex;
+	flex-flow: column wrap;
+	gap: 20px 0px;
+  width: 400px;
+}
+
+input {
+	border: none;
+	border: 1px solid lightgrey;
+	height: 30px;
+	border-radius: 5px;
+	padding: 0 0 0 8px;
+}
+
+input:hover {
+	border: none;
+	border: 1px solid lightgreen;
+	box-shadow: 1px 1px 5px lightgrey;
+}
+
+label {
+	color: mediumblue;
+	opacity: 0.5;
+	font-size: 0.65rem;
+	font-weight: 550;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding-bottom: 1px;
+}
+
+input:focus {
+	border: 0px;
+}
+
+form > p {
 	width: 100%;
 }
 
-.dishImg-wrapper {
-	display: flex;
-	flex-direction: column;
+form > p > span {
+	color: darkgreen;
+	font-weight: bold;
 }
 
-.dish-title {
+form > p > span:hover {
+	cursor:pointer;
+}
+
+button {
+	border: none;
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: bold;
+	color: var(--main-button-color);
+	padding: 12px 40px;
+	background-color: darkgreen;
 	text-align: center;
-	padding: 0px;
-	flex: 1;
-	align-self: center;
 }
 
-.dishImg {
-	width: 150px;
-	flex: 2;
+form > p:first-child {
+	font-weight: bold;
+	font-size: 1.1rem;
 }
 
-@media screen and (max-width: 500px) {
-	.hero {
-	display: grid;
-	grid-template: 1fr / 1fr;
-	gap: 20px;
-	justify-items: center;
-	align-items: center;
-	}
-  .hero > h1 {
-	margin: 0px;
-	}
-	.tile-content {
-		margin-top: 20px;
-	}
+button:hover {
+	cursor: pointer;
+	box-shadow: 1px 1px 10px lightgrey;
 }
+
+button:active {
+	position: relative;
+	top: 1px;
+}
+
+input:valid {
+	border: 2px solid lightgreen;
+	background-size: 20px;
+	background-repeat: no-repeat;
+	background-position: 98% 2px;
+}
+
+input[type="password"]:invalid {
+	border: 1px solid red;
+}
+
 
 @media screen and (min-width: 1200px) {
 .tile-content {

@@ -15,8 +15,7 @@ export class ProjectTabView {
   buildView() {
     let projectAddButton = this.createAddProjectButton();
     this.addProjectButton(projectAddButton);
-    let tab = this.createProjectTab();
-    this.createProjectTabDeleteButton(tab);
+    this.createProjectTab();
   }
 
 
@@ -36,7 +35,7 @@ export class ProjectTabView {
 
   createAddProjectButton() {
     let addProjectButton = document.createElement("button");
-    addProjectButton.classList.add("projectAddButton");
+    addProjectButton.classList.add("addButton");
     this.projectHeader.appendChild(addProjectButton);
     return addProjectButton;
   }
