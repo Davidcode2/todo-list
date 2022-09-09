@@ -2,15 +2,15 @@ import { Project } from './project';
 import { Todo } from './todo';
 
 test("create new project", () => {
-  expect(new Project("someproject")).toEqual({ title: "someproject", todos: [] })
+  expect(new Project()).toEqual({ id: 1, todos: [] })
 });
 
 test("add todo", () => {
-  let myProject = new Project("main Todos");
+  let myProject = new Project();
   let myTodo = new Todo("clean house");
   myProject.addTodo(myTodo);
   expect(myProject).toEqual({
-    title: "main Todos",
+    id: 2,
     todos: [{
       title: "clean house",
       description: undefined,
@@ -22,9 +22,9 @@ test("add todo", () => {
 });
 
 test("remove todo", () => {
-  let myProjectTwo = new Project("secondary");
+  let myProjectTwo = new Project();
   let myTodo = new Todo("clean house");
   myProjectTwo.addTodo(myTodo);
   myProjectTwo.removeTodo(myTodo);
-  expect(myProjectTwo).toEqual({ title: "secondary", todos: [] });
+  expect(myProjectTwo).toEqual({ id: 3, todos: [] });
 });

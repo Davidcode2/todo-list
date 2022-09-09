@@ -6,8 +6,8 @@ export class Project {
   private title: string;
   private id: number;
 
-  constructor(title: string) {
-    this.title = title;
+  constructor() {
+    this.id = Project.projectCounter();
   }
 
   public addTodo(todo: Todo) {
@@ -28,8 +28,8 @@ export class Project {
     return count;
   })();
 
-  static makeDefaultProjectName() {
-    return `Project ${this.projectCounter()}`;
+  public makeDefaultProjectName() {
+    return `Project ${this.id}`;
   }
 
   get Todos() {
@@ -38,6 +38,14 @@ export class Project {
 
   get Title() {
     return this.title;
+  }
+
+  set Title(title: string) {
+    this.title = title;
+  }
+
+  get Id() {
+    return this.id;
   }
 
 }
