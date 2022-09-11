@@ -1,79 +1,49 @@
 import { Todo } from "./todo";
+import { TodoForm } from "./todoForm";
+import { TodoManager } from "./todoManager";
 
 export class TodoView {
 
-  todoSection = document.querySelector("main");
+  main = document.querySelector("main");
+  todoForm: TodoForm;
+  todoManager: TodoManager;
 
   constructor() {
     this.buildView();
   }
 
-  buildView() {
+  private buildView() {
+    this.todoForm = new TodoForm(this.main, this.saveTodo);
     this.createAddTodoButton();
-    //let inputs = this.createTodoFormInputs();
-    //this.createTodoForm(inputs);
   }
 
-  createAddTodoButton() {
+  private createAddTodoButton() {
     let todoButton = document.createElement("button");
     todoButton.classList.add("addButton", "addTodoButton");
-    this.todoSection.appendChild(todoButton);
+    this.main.appendChild(todoButton);
     todoButton.addEventListener('click', () => {
-      this.todoForm();
+      this.todoForm.renderTodoForm();
     });
   }
 
-  todoForm() {
-    let inputs = this.createTodoFormInputs();
-    let form = this.createTodoForm(inputs);
-    this.todoSection.appendChild(form);
-  }
-
-  createTodoFormInputs() {
-    let titleInput = document.createElement("input");
-    let descriptionInput = document.createElement("input");
-    let dueDateInput = document.createElement("input");
-    let priorityInput = document.createElement("input");
-    let notesInput = document.createElement("input");
-    return [
-      titleInput,
-      descriptionInput,
-      dueDateInput,
-      priorityInput,
-      notesInput,
-    ]
-
-  }
-
-  createTodoForm(inputs: Array<HTMLElement>) {
-    let todoForm = document.createElement("form");
-    todoForm.classList.add("todoForm");
-    for (let input of inputs) {
-      todoForm.appendChild(input);
+  private saveTodo() {
+    const formData: HTMLFormElement = document.querySelector("form");
+    console.log(formData.children);
+    let todoValues = [];
+    let child: any
+    for (child of formData.children) {
+      if (child.localName !== "button" && child.localName !== "label") {
+        console.log(child.value);
+        todoValues.push(child.value);
+      }
     }
-    let okButton = document.createElement("button");
-    okButton.type = "button";
-    okButton.addEventListener('click', () => { this.saveTodo });
-    todoForm.appendChild(okButton);
-
-    return todoForm;
+    let todo = TodoManager.newTodo.apply(null, todoValues);
+    this.appendTodo(todo);
   }
 
-  saveTodo() {
-    const formData = new FormData(document.querySelector('form'))
-    for (var pair of formData.fromEntries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
+  appendTodo(todo) {};
+
+  private createTodo() {
   }
 
-    createTodo() {
-    }
-
-    appendTodo(todo: Todo) {
-      let todoStringified = todo.toString();
-      let todoElement = document.createElement('div');
-      todoElement.innerHTML = todoStringified;
-      this.todoSection.appendChild(todoElement);
-    }
-
-  }
+}
