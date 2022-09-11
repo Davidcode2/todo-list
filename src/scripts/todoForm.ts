@@ -1,13 +1,14 @@
 import { Todo } from "./todo";
+import { TodoManager } from "./todoManager";
 
 export class TodoForm {
 
-  constructor(private todoSection: HTMLElement, private saveTodo: Function) { }
+  constructor(private todoSection: Element, private saveTodo: Function) { }
 
-  private form;
-  private formSection = document.querySelector(".formSection");
+  private form: HTMLFormElement;
+  private formSection = document.querySelector("main");
 
-  private inputObj = [
+  private inputObjects = [
     { name: "title", type: "text" },
     { name: "description", type: "textarea" },
     { name: "dueDate", type: "Date" },
@@ -23,16 +24,16 @@ export class TodoForm {
 
   private createTodoFormInputsWithLabels() {
     let inputsVariables = []
-    for (let i = 0; i < this.inputObj.length; i++) {
-      let label = this.createLabel(this.inputObj[i].name);
+    for (let i = 0; i < this.inputObjects.length; i++) {
+      let label = this.createLabel(this.inputObjects[i].name);
       inputsVariables.push(label);
-      let input = this.createInput(this.inputObj[i]);
+      let input = this.createInput(this.inputObjects[i]);
       inputsVariables.push(input);
     }
     return inputsVariables;
   }
 
-  private createInput(inputObj) {
+  private createInput(inputObj: {name: string,type: string}) {
     if (inputObj.type === "textarea") {
       this[`{inputNames[i]}`] = document.createElement("textarea");
     } else {
@@ -67,45 +68,8 @@ export class TodoForm {
     return todoForm;
   }
   
-  private formatTodo(todo: Todo) {
-    let todoContainer = document.createElement('div');
-    todoContainer.classList.add("todoElement");
-    todoContainer.dataset.id = String(todo.Id);
-    for (let entry in todo) {
-      let span = document.createElement("span");
-      if (entry === "title") {
-        span.innerHTML = todo[entry];
-        span.classList.add("todoTitle");
-        todoContainer.appendChild(span);
-      } else if (entry === "dueDate") {
-        span.classList.add("dueDateKey", "todoKey");
-        span.innerHTML = `${entry}:`;
-        todoContainer.appendChild(span);
-        let propertySpan = document.createElement("span");
-        propertySpan.innerHTML = String(todo[entry]);
-        todoContainer.appendChild(propertySpan);
-      } else if (entry === "description") {
-        span.innerHTML = `${entry}:`;
-        span.classList.add("descriptionKey", "todoKey");
-        todoContainer.appendChild(span);
-        let propertySpan = document.createElement("span");
-        propertySpan.innerHTML = todo[entry];
-        todoContainer.appendChild(propertySpan);
-      } else if (entry === "notes") {
-        span.innerHTML = `${entry}:`;
-        span.classList.add("notesKey", "todoKey");
-        todoContainer.appendChild(span);
-        let propertySpan = document.createElement("span");
-        propertySpan.innerHTML = todo[entry];
-        todoContainer.appendChild(propertySpan);
-      } 
-      console.log(entry);
-    }
-    return todoContainer;
-  }
-
   public appendTodo(todo: Todo) {
-    let todoContainer = this.formatTodo(todo);
+    let todoContainer = TodoManager.formatTodo(todo);
     this.todoSection.appendChild(todoContainer);
   }
 }

@@ -1,9 +1,9 @@
 import { Project } from "./project";
 import { ProjectManager } from "./projectManager"
+import { TodoManager } from "./todoManager";
 
 
 export class ProjectTabView {
-
 
   constructor(private projectManager: ProjectManager) {
     this.buildView();
@@ -14,14 +14,14 @@ export class ProjectTabView {
 
   buildView() {
     let projectAddButton = this.createAddProjectButton();
+    let tab = this.createProjectTab(0);
+    this.projectTabArea.appendChild(tab);
     this.addProjectButton(projectAddButton);
-    this.createProjectTab();
   }
-
 
   addProjectButton(projectAddButton: HTMLElement) {
     projectAddButton.addEventListener('click', () => {
-      let tab = this.createProjectTab();
+      let tab = this.createTitledProjectTab();
       this.projectTabArea.appendChild(tab);
     });
   }
@@ -40,10 +40,10 @@ export class ProjectTabView {
     return addProjectButton;
   }
 
-  createProjectTab() {
-    let project = new Project();
-    project.Title = project.makeDefaultProjectName();
+  createProjectTab(tabNumber: number) {
+    let project = this.projectManager.projects[tabNumber];
     let tab = document.createElement("div");
+    tab.dataset.indexNumber = String(project.Id);
     tab.classList.add('tab');
     tab.innerHTML = project.Title;
     tab.addEventListener('click', () => this.switchTo(tab));
@@ -51,10 +51,39 @@ export class ProjectTabView {
     return tab;
   }
 
+  createTitledProjectTab() {
+    let project = this.projectManager.createProject();
+    project.Title = project.makeDefaultProjectName();
+    let tab = document.createElement("div");
+    tab.dataset.indexNumber = String(project.Id);
+    tab.classList.add('tab');
+    tab.innerHTML = project.Title;
+    tab.addEventListener('click', () => this.switchTo(tab));
+    tab.appendChild(this.createProjectTabDeleteButton(tab));
+    return tab;
+  }
+
+  updateProjectTab(tab: HTMLElement) {
+    let project = this.projectManager.load(Number(tab.dataset.indexNumber))
+    tab.innerHTML = project.Title;
+  }
+
+  removeAllChildren(element: Element) {
+    while (element.lastChild) {
+        element.removeChild(element.lastChild);
+    }
+  }
+
   switchTo(tab: HTMLElement) {
-    let todoDiv = document.querySelector('.todos');
     let project: Project = this.projectManager.load(Number(tab.dataset.indexNumber));
-    //todoDiv.appendChild(tabContent);
+    TodoManager.SelectedProject = project;
+    let todoDiv = document.querySelector('.todoContainer');
+    this.removeAllChildren(todoDiv);
+    for (let todo of project.Todos) {
+      let todoElement = TodoManager.formatTodo(todo);
+      todoDiv.appendChild(todoElement);
+
+    }
   }
 
   deleteProjectTab(tab: HTMLElement) {
