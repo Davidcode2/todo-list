@@ -27,8 +27,7 @@ export class Todo {
   static todoCounter = (function () {
     let count = 0;
     function counter() {
-      count++;
-      return count;
+      return count++;
     }
     return counter;
   })();

@@ -22,8 +22,7 @@ export class Project {
   static projectCounter = (function() {
     let count = 0;
     function counter() {
-      count++;
-      return count;
+      return count++;
     }
     return counter;
   })();

@@ -7,7 +7,7 @@ test('create new todo only with title', () => {
     dueDate: undefined,
     priority: 2,
     notes: undefined,
-    id: 1,
+    id: 0,
   });
 });
 
@@ -18,6 +18,6 @@ test('create new todo with date', () => {
     dueDate: new Date(2022, 2, 7),
     priority: 2,
     notes: undefined,
-    id: 2
+    id: 1
   });
 });
