@@ -20,12 +20,12 @@ export class Project {
   }
 
   static projectCounter = (function() {
-    let counter = 0;
-    function count() {
-      counter++;
-      return counter;
+    let count = 0;
+    function counter() {
+      count++;
+      return count;
     }
-    return count;
+    return counter;
   })();
 
   public makeDefaultProjectName() {

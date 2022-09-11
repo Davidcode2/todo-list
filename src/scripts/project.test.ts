@@ -16,7 +16,8 @@ test("add todo", () => {
       description: undefined,
       dueDate: undefined,
       priority: 2,
-      notes: undefined
+      notes: undefined,
+      id: 1,
     }]
   });
 });
