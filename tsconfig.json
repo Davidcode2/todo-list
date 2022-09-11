@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "es6",
     "target": "es5",
+    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "dom.iterable"
+    ],
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node"
