@@ -4,6 +4,7 @@ import { TodoManager } from "./todoManager";
 
 export class TodoView {
 
+  todoContainer = document.querySelector(".todoContainer");
   main = document.querySelector("main");
   todoForm: TodoForm;
   todoManager: TodoManager;
@@ -13,8 +14,10 @@ export class TodoView {
   }
 
   private buildView() {
-    this.todoForm = new TodoForm(this.main, this.saveTodo);
+    this.todoForm = new TodoForm(this.todoContainer, this.saveTodo);
     this.createAddTodoButton();
+    document.querySelector("main").appendChild(this.todoContainer);
+    this.todoContainer.classList.add("todoContainer");
   }
 
   private createAddTodoButton() {
@@ -41,9 +44,6 @@ export class TodoView {
     this.appendTodo(todo);
   }
 
-  appendTodo(todo) {};
-
-  private createTodo() {
-  }
+  appendTodo(todo) { };
 
 }
