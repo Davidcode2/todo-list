@@ -70,19 +70,39 @@ export class ProjectTabView {
 
   removeAllChildren(element: Element) {
     while (element.lastChild) {
-        element.removeChild(element.lastChild);
+      element.removeChild(element.lastChild);
+    }
+  }
+
+  unmarkSiblings(unvisitedSiblings: Array<Element>, visitedSiblings: Array<Element>) {
+    let currentTab: Element;
+    for (let tab of unvisitedSiblings) {
+      visitedSiblings.push(tab);
+      unvisitedSiblings.splice(unvisitedSiblings.indexOf(tab), 1);
+      if (tab.nextElementSibling && !visitedSiblings.includes(tab.nextElementSibling)) {
+        currentTab = tab.nextElementSibling;
+        currentTab.classList.remove("selectedTab");
+        unvisitedSiblings.push(currentTab);
+      }
+      if (tab.previousElementSibling && !visitedSiblings.includes(tab.previousElementSibling)) {
+        currentTab = tab.previousElementSibling;
+        currentTab.classList.remove("selectedTab");
+        unvisitedSiblings.push(currentTab);
+      }
+      this.unmarkSiblings(unvisitedSiblings, visitedSiblings);
     }
   }
 
   switchTo(tab: HTMLElement) {
     let project: Project = this.projectManager.load(Number(tab.dataset.indexNumber));
+    tab.classList.toggle("selectedTab");
+    this.unmarkSiblings([tab], []);
     TodoManager.SelectedProject = project;
     let todoDiv = document.querySelector('.todoContainer');
     this.removeAllChildren(todoDiv);
     for (let todo of project.Todos) {
       let todoElement = TodoManager.formatTodo(todo);
       todoDiv.appendChild(todoElement);
-
     }
   }
 

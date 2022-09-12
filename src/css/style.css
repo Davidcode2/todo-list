@@ -39,7 +39,6 @@ li::selection {
 
 header > div {
   height: 50px;
-  background: white;
 }
 
 header > nav > ul {
@@ -195,6 +194,10 @@ main {
   display: flex;
 }
 
+.projectTabs .selectedTab {
+  background-color: darkslategray;
+}
+
 span {
 	background-color: snow;
 }
@@ -210,10 +213,10 @@ span::selection {
 
 .tab {
   display: flex;
-  padding: 0 0 0 24px ;
+  padding: 0 0 0 14px ;
   background-color: white;
   border: 1px solid lightgrey;
-  border-radius: 20px;
+  border-radius: 0 0 20px 0;
   text-align: center;
   align-items: center;
 }

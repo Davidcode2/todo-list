@@ -1,7 +1,7 @@
 import { Project } from "./project";
 import { Todo } from "./todo";
 
-export class TodoManager {
+export abstract class TodoManager {
 
   static selectedProject: Project;
 
