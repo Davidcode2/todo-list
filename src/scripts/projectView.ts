@@ -1,4 +1,3 @@
-import { Project } from "./project";
 import { ProjectManager } from "./projectManager"
 import { TodoManager } from "./todoManager";
 
@@ -44,7 +43,7 @@ export class ProjectTabView {
     let project = this.projectManager.projects[tabNumber];
     let tab = document.createElement("div");
     tab.dataset.indexNumber = String(project.Id);
-    tab.classList.add('tab');
+    tab.classList.add('tab', 'blur');
     tab.innerHTML = project.Title;
     tab.addEventListener('click', () => this.switchTo(tab));
     tab.appendChild(this.createProjectTabDeleteButton(tab));
@@ -94,8 +93,8 @@ export class ProjectTabView {
   }
 
   switchTo(tab: HTMLElement) {
-    let project: Project = this.projectManager.load(Number(tab.dataset.indexNumber));
-    tab.classList.toggle("selectedTab");
+    let project = this.projectManager.load(Number(tab.dataset.indexNumber));
+    tab.classList.add("selectedTab");
     this.unmarkSiblings([tab], []);
     TodoManager.SelectedProject = project;
     let todoDiv = document.querySelector('.todoContainer');

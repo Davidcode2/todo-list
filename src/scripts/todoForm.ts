@@ -19,6 +19,7 @@ export class TodoForm {
   public renderTodoForm() {
     let inputs = this.createTodoFormInputsWithLabels();
     this.form = this.createTodoForm(inputs);
+    this.form.classList.add("blur");
     this.formSection.appendChild(this.form);
   }
 

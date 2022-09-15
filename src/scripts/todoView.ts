@@ -1,4 +1,3 @@
-import { Todo } from "./todo";
 import { TodoForm } from "./todoForm";
 import { TodoManager } from "./todoManager";
 
@@ -22,7 +21,7 @@ export class TodoView {
 
   private createAddTodoButton() {
     let todoButton = document.createElement("button");
-    todoButton.classList.add("addButton", "addTodoButton");
+    todoButton.classList.add("addButton", "addTodoButton", "blur");
     this.main.appendChild(todoButton);
     todoButton.addEventListener('click', () => {
       this.todoForm.renderTodoForm();
@@ -42,6 +41,9 @@ export class TodoView {
     }
     let todo = TodoManager.newTodo.apply(null, todoValues);
     this.appendTodo(todo);
+  }
+
+  private checkTodo() {
   }
 
   appendTodo(todo) { };

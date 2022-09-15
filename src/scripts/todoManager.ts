@@ -18,7 +18,7 @@ export abstract class TodoManager {
 
   static formatTodo(todo: Todo) {
     let todoElement = document.createElement('div');
-    todoElement.classList.add("todoElement");
+    todoElement.classList.add("todoElement", "blur");
     todoElement.dataset.id = String(todo.Id);
     for (let entry in todo) {
       let span = document.createElement("span");

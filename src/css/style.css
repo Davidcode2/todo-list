@@ -5,7 +5,7 @@
 
 :root {
   --main-button-color: black;
-  --main-button-background-color: darkgrey;
+  --main-button-background-color: rgba(10, 10, 10, 0.4);
 }
 
 * {
@@ -41,32 +41,13 @@ header > div {
   height: 50px;
 }
 
-header > nav > ul {
-	display: flex;
-	justify-content: end;
-}
-li {
-	margin: 10px;
-	padding: 5px;
-	list-style:none;
-	text-justify: center;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	cursor: pointer;
-	transition-property: border;
-	transition-duration: 0.3s;
-}
-li:hover {
-	border-top: 1px solid darkgoldenrod;
-	border-bottom: 1px solid darkgoldenrod;
-}
-li:focus {
-	color: darkgoldenrod;
-}
-
 main {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr
+}
+
+.todoContainer {
+  margin-top: 40px;
 }
 
 .todoElement {
@@ -74,7 +55,15 @@ main {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1r;
   grid-column-start: 2;
-  margin: 5px;
+  border-radius: 10px;
+  background-color: rgba(96, 90, 88, 0.2);
+  box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, .2);
+  padding: 10px;
+  margin: 5px 0 5px 0;
+}
+
+.blur {
+  backdrop-filter: blur(10px);
 }
 
 .todoTitle {
@@ -171,9 +160,11 @@ main {
 .addButton {
   display: flex;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 20px;
   order: 2;
-  border-radius: 20px;
+  border-radius: 10px;
 
 }
 
@@ -182,12 +173,8 @@ main {
 }
 
 .addTodoButton {
-  grid-column-start: 3;
-  align-self: end;
-  justify-self: end;
-  position: sticky;
-  bottom: 0;
-  right: 0;
+  grid-column-start: 2;
+  align-content: center;
 }
 
 .projectTabs {
@@ -195,12 +182,10 @@ main {
 }
 
 .projectTabs .selectedTab {
-  background-color: darkslategray;
+  background-color: rgba(20, 85, 56, 0.3);
+  margin-bottom: 10px;
 }
 
-span {
-	background-color: snow;
-}
 span::selection {
 	background-color: darkgoldenrod;
 	color: black;
@@ -214,27 +199,36 @@ span::selection {
 .tab {
   display: flex;
   padding: 0 0 0 14px ;
-  background-color: white;
-  border: 1px solid lightgrey;
-  border-radius: 0 0 20px 0;
+  background-color: rgba(100,100,200, 0.1);
+  border-radius: 0px 0px 20px 10px;
+  box-shadow: 0px 20px 20px 0px rgba(4, 50, 50, .2);
   text-align: center;
   align-items: center;
+  margin-bottom: 20px;
+}
+
+.tab:hover {
+  box-shadow: 0px 20px 20px 0px rgba(200, 50, 50, .2);
 }
 
 
 form > div {
 	display: flex;
-	flex-flow: column wrap;
+	flex-flow: row wrap;
 	width: max(50%, 250px);
 	padding-right: 10vw;
 }
 
 form {
   grid-column-start: 2;
-	display: flex;
-	flex-flow: column wrap;
-	gap: 20px 0px;
-  width: 400px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+	width: max(100%, 250px);
+  background-color: rgba(96, 90, 88, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  gap: 15px;
+  margin: 5px 0 5px 0;
 }
 
 input {
@@ -242,7 +236,19 @@ input {
 	border: 1px solid lightgrey;
 	height: 30px;
 	border-radius: 5px;
+  background-color: rgba(96, 90, 88, 0.2);
 	padding: 0 0 0 8px;
+}
+
+textarea {
+  background-color: rgba(96, 90, 88, 0.2);
+	border: 1px solid lightgrey;
+	height: 30px;
+  border-radius: 5px;
+}
+textarea:hover {
+	border: none;
+	box-shadow: 1px 1px 5px lightgrey;
 }
 
 input:hover {
@@ -282,7 +288,6 @@ button {
 	font-size: 12px;
 	font-weight: bold;
 	color: var(--main-button-color);
-	padding: 12px 40px;
 	background-color: var(--main-button-background-color);
 	text-align: center;
 }
@@ -292,7 +297,7 @@ form > p:first-child {
 	font-size: 1.1rem;
 }
 
-button:hover {
+.addButton:hover {
 	cursor: pointer;
 	box-shadow: 1px 1px 10px lightgrey;
 }
