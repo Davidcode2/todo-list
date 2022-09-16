@@ -4,7 +4,7 @@
 }
 
 :root {
-  --main-button-color: black;
+  --main-button-color: grey;
   --main-button-background-color: rgba(10, 10, 10, 0.4);
 }
 
@@ -48,6 +48,7 @@ main {
 
 .todoContainer {
   margin-top: 40px;
+  grid-column-start: 2;
 }
 
 .todoElement {
@@ -56,14 +57,30 @@ main {
   grid-template-rows: 1fr 1fr 1r;
   grid-column-start: 2;
   border-radius: 10px;
+  color: white;
   background-color: rgba(96, 90, 88, 0.2);
   box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, .2);
   padding: 10px;
   margin: 5px 0 5px 0;
 }
 
+.checkbox {
+  position: relative;
+  right: 11em;
+  bottom: 24px;
+}
+
 .blur {
   backdrop-filter: blur(10px);
+}
+
+.saveButton {
+  padding: 20px;
+  margin-top: 50px;
+}
+.saveButton:hover {
+	border: none;
+	box-shadow: 1px 1px 5px lightgrey;
 }
 
 .todoTitle {
@@ -161,10 +178,10 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: 20px;
   order: 2;
-  border-radius: 10px;
+  border-radius: 0px 0px 10px 10px;
 
 }
 
@@ -175,6 +192,8 @@ main {
 .addTodoButton {
   grid-column-start: 2;
   align-content: center;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
 .projectTabs {
@@ -202,6 +221,7 @@ span::selection {
   background-color: rgba(100,100,200, 0.1);
   border-radius: 0px 0px 20px 10px;
   box-shadow: 0px 20px 20px 0px rgba(4, 50, 50, .2);
+  color: grey;
   text-align: center;
   align-items: center;
   margin-bottom: 20px;
@@ -222,7 +242,7 @@ form > div {
 form {
   grid-column-start: 2;
   display: grid;
-  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
 	width: max(100%, 250px);
   background-color: rgba(96, 90, 88, 0.2);
   padding: 20px;
@@ -236,8 +256,20 @@ input {
 	border: 1px solid lightgrey;
 	height: 30px;
 	border-radius: 5px;
+  color: white;
   background-color: rgba(96, 90, 88, 0.2);
 	padding: 0 0 0 8px;
+}
+
+form label {
+  grid-column: 1 / 1;
+}
+
+form input {
+ grid-column: 2 / 5;
+ }
+
+.titleInput {
 }
 
 textarea {
@@ -245,10 +277,22 @@ textarea {
 	border: 1px solid lightgrey;
 	height: 30px;
   border-radius: 5px;
+  width: 20.6rem;
+  padding: 5px 3px 0px 6px;
+  color: lightgray;
 }
+
 textarea:hover {
 	border: none;
 	box-shadow: 1px 1px 5px lightgrey;
+}
+
+input[type=date] {
+  width: 150px;
+}
+
+input[type=number] {
+  width: 150px;
 }
 
 input:hover {

@@ -1,4 +1,5 @@
 import { ProjectManager } from "./projectManager"
+import { TodoForm } from "./todoForm";
 import { TodoManager } from "./todoManager";
 
 
@@ -6,10 +7,13 @@ export class ProjectTabView {
 
   constructor(private projectManager: ProjectManager) {
     this.buildView();
+    let element = document.createElement("div");
+    this.todoForm = new TodoForm(element);
   }
 
   projectTabArea = document.querySelector(".projectTabs");
   projectHeader = document.querySelector("header>div");
+  todoForm: TodoForm;
 
   buildView() {
     let projectAddButton = this.createAddProjectButton();
@@ -92,7 +96,7 @@ export class ProjectTabView {
     }
   }
 
-  switchTo(tab: HTMLElement) {
+  switchTo(tab: any) {
     let project = this.projectManager.load(Number(tab.dataset.indexNumber));
     tab.classList.add("selectedTab");
     this.unmarkSiblings([tab], []);
@@ -100,7 +104,7 @@ export class ProjectTabView {
     let todoDiv = document.querySelector('.todoContainer');
     this.removeAllChildren(todoDiv);
     for (let todo of project.Todos) {
-      let todoElement = TodoManager.formatTodo(todo);
+      let todoElement = this.todoForm.formatTodo(todo);
       todoDiv.appendChild(todoElement);
     }
   }
@@ -108,6 +112,11 @@ export class ProjectTabView {
   deleteProjectTab(tab: HTMLElement) {
     console.log("deleting");
     this.projectTabArea.removeChild(tab);
+    if (tab.previousElementSibling) {
+      this.switchTo(tab.previousElementSibling);
+    } else if (tab.nextElementSibling) {
+      this.switchTo(tab.nextElementSibling);
+    }
   }
 
 }

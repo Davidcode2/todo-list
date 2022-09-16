@@ -1,4 +1,5 @@
 import { Project } from "./project";
+import { ProjectTabView } from "./projectView";
 import { TodoManager } from "./todoManager";
 
 export class ProjectManager {

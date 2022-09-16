@@ -13,7 +13,7 @@ export class TodoView {
   }
 
   private buildView() {
-    this.todoForm = new TodoForm(this.todoContainer, this.saveTodo);
+    this.todoForm = new TodoForm(this.todoContainer);
     this.createAddTodoButton();
     document.querySelector("main").appendChild(this.todoContainer);
     this.todoContainer.classList.add("todoContainer");
@@ -26,24 +26,6 @@ export class TodoView {
     todoButton.addEventListener('click', () => {
       this.todoForm.renderTodoForm();
     });
-  }
-
-  private saveTodo() {
-    const formData: HTMLFormElement = document.querySelector("form");
-    console.log(formData.children);
-    let todoValues = [];
-    let child: any
-    for (child of formData.children) {
-      if (child.localName !== "button" && child.localName !== "label") {
-        console.log(child.value);
-        todoValues.push(child.value);
-      }
-    }
-    let todo = TodoManager.newTodo.apply(null, todoValues);
-    this.appendTodo(todo);
-  }
-
-  private checkTodo() {
   }
 
   appendTodo(todo) { };
