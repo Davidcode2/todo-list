@@ -13,6 +13,7 @@ export class Todo {
   private dueDate: Date;
   private priority: Priority;
   private notes: string;
+  private checked: boolean;
   private id: number;
 
   constructor(title: string, description?: string, dueDate?: Date, priority: Priority = 2, notes?: string) {
@@ -22,6 +23,7 @@ export class Todo {
     this.priority = priority;
     this.notes = notes;
     this.id = Todo.todoCounter();
+    this.checked = false;
   }
 
   static todoCounter = (function () {
@@ -34,6 +36,14 @@ export class Todo {
 
   get Id() {
     return this.id;
+  }
+
+  get Checked() {
+    return this.checked;
+  }
+
+  set Checked(status: boolean) {
+    this.checked = status;
   }
 
 }

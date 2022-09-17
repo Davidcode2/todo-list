@@ -28,6 +28,4 @@ export class TodoView {
     });
   }
 
-  appendTodo(todo) { };
-
 }

@@ -11,6 +11,11 @@ export abstract class TodoManager {
     return todo;
   }
 
+  static updateTodo(todoID: number) {
+    let todo: Todo = this.selectedProject.Todos[todoID];
+    TodoManager.selectedProject.updateTodo(todo);
+  }
+
   static set SelectedProject(project: Project) {
     console.log(project);
     TodoManager.selectedProject = project;

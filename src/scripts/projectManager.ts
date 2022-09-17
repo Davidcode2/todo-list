@@ -18,7 +18,6 @@ export class ProjectManager {
 
   public createProject() {
     let project = new Project();
-    console.log(project);
     this.projects.push(project);
     return project;
   }

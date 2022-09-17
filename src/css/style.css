@@ -5,7 +5,10 @@
 
 :root {
   --main-button-color: grey;
-  --main-button-background-color: rgba(10, 10, 10, 0.4);
+  --main-button-background-color: rgba(205, 205, 205, 0.1);
+  --main-background-color: rgba(205, 205, 205, 0.1);
+  --main-shadow: rgba(10,10,10,0.2);
+  --main-text-color: rgba(150,140,150);
 }
 
 * {
@@ -57,17 +60,30 @@ main {
   grid-template-rows: 1fr 1fr 1r;
   grid-column-start: 2;
   border-radius: 10px;
-  color: white;
-  background-color: rgba(96, 90, 88, 0.2);
-  box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, .2);
+  color: var(--main-text-color);
+  background-color: var(--main-background-color);
   padding: 10px;
-  margin: 5px 0 5px 0;
+  margin: 10px 0 15px 0;
+}
+
+.todoElementShadow {
+  box-shadow: 0px 20px 20px 0px var(--main-shadow);
+  transition: box-shadow 0.1s;
+}
+
+.crossedOut {
+  text-decoration:line-through;
 }
 
 .checkbox {
   position: relative;
   right: 11em;
   bottom: 24px;
+  filter: invert(19%) hue-rotate(281deg) brightness(1.7);
+}
+
+input[type=checkbox]::before {
+  background: rgba(134,59,29,0.5);
 }
 
 .blur {
@@ -84,7 +100,7 @@ main {
 }
 
 .todoTitle {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   padding-right: 2px;
   grid-column: 1 / 3;
 }
@@ -235,15 +251,13 @@ span::selection {
 form > div {
 	display: flex;
 	flex-flow: row wrap;
-	width: max(50%, 250px);
 	padding-right: 10vw;
 }
 
 form {
   grid-column-start: 2;
   display: grid;
-  grid-template-columns: repeat(5, minmax(100px, 1fr));
-	width: max(100%, 250px);
+  grid-template-columns: repeat(4, minmax(auto,1fr));
   background-color: rgba(96, 90, 88, 0.2);
   padding: 20px;
   border-radius: 10px;
@@ -262,14 +276,17 @@ input {
 }
 
 form label {
-  grid-column: 1 / 1;
+  width: 50px;
 }
 
-form input {
- grid-column: 2 / 5;
- }
+input:first-child {
+  grid-column: 1 / 5;
+}
 
 .titleInput {
+  font-size: 2rem;
+  height: 50px;
+  border: none;
 }
 
 textarea {
@@ -278,6 +295,7 @@ textarea {
 	height: 30px;
   border-radius: 5px;
   width: 20.6rem;
+  height: 4rem;
   padding: 5px 3px 0px 6px;
   color: lightgray;
 }
@@ -314,10 +332,6 @@ input:focus {
 	border: 0px;
 }
 
-form > p {
-	width: 100%;
-}
-
 form > p > span {
 	font-weight: bold;
 }
@@ -334,11 +348,6 @@ button {
 	color: var(--main-button-color);
 	background-color: var(--main-button-background-color);
 	text-align: center;
-}
-
-form > p:first-child {
-	font-weight: bold;
-	font-size: 1.1rem;
 }
 
 .addButton:hover {
@@ -359,6 +368,11 @@ input:valid {
 
 input[type="password"]:invalid {
 	border: 1px solid red;
+}
+
+.fadeOut {
+  background-color: rgba(0,0,0, 0.1);
+  transition: background-color 0.2s
 }
 
 @media screen and (min-width: 1200px) {

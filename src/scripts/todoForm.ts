@@ -32,7 +32,9 @@ export class TodoForm {
     let inputsVariables = []
     for (let i = 0; i < this.inputObjects.length; i++) {
       let label = this.createLabel(this.inputObjects[i].name);
-      inputsVariables.push(label);
+      if (this.inputObjects[i].name === "dueDate") {
+        inputsVariables.push(label);
+      }
       let input = this.createInput(this.inputObjects[i]);
       inputsVariables.push(input);
     }
@@ -43,11 +45,17 @@ export class TodoForm {
     if (inputObj.type === "textarea") {
       this[`{inputNames[i]}`] = document.createElement("textarea");
     } else {
+      console.log(this[`{inputNames[i]}`]);
       this[`{inputNames[i]}`] = document.createElement("input");
       this[`{inputNames[i]}`].type = inputObj.type;
     }
-    if (this[`{inputNames[i]}`].name === "input") {
+    if (inputObj.name === "title") {
       this[`{inputNames[i]}`].classList.add("titleInput");
+      this[`{inputNames[i]}`].value = "Task";
+    }
+    if (inputObj.name === "priority") {
+      this[`{inputNames[i]}`].max = 3;
+      this[`{inputNames[i]}`].min = 0;
     }
     this[`{inputNames[i]}`].placeholder = inputObj.name;
     return this[`{inputNames[i]}`];
@@ -82,12 +90,10 @@ export class TodoForm {
 
   private saveTodo() {
     const formData: HTMLFormElement = document.querySelector("form");
-    console.log(formData.children);
     let todoValues = [];
     let child: any
     for (child of formData.children) {
       if (child.localName !== "button" && child.localName !== "label") {
-        console.log(child.value);
         todoValues.push(child.value);
       }
     }
@@ -100,27 +106,42 @@ export class TodoForm {
     this.todoSection.appendChild(todoContainer);
   }
 
+  private check(todoElement: HTMLElement) {
+    todoElement.classList.toggle("fadeOut");
+    todoElement.classList.toggle("todoElementShadow");
+    TodoManager.updateTodo(Number(todoElement.dataset.id));
+  }
 
-  private checkTodo(todoElement: HTMLElement) {
+  private setChecked(checkbox: HTMLInputElement, todo: Todo, todoElement: HTMLElement) {
+    if (todo.Checked) {
+      this.check(todoElement);
+      checkbox.checked = true
+    }
+  }
+
+  private createCheckTodo(todo: Todo, todoElement: HTMLElement) {
     let checkBox = document.createElement("input");
     checkBox.type = "checkbox";
     checkBox.classList.add("checkbox");
     checkBox.addEventListener('change', () => {
-      todoElement.remove();
+      todo.Checked ? todo.Checked = false : todo.Checked = true;
+      todoElement.firstElementChild.classList.toggle("crossedOut");
+      this.check(todoElement);
     });
     return checkBox;
   }
 
   public formatTodo(todo: Todo) {
     let todoElement = document.createElement('div');
-    todoElement.classList.add("todoElement", "blur");
-    todoElement.dataset.id = String(todo.Id);
+    todoElement.classList.add("todoElement", "blur", "todoElementShadow");
+    todoElement.dataset.id = String(todo?.Id);
     for (let adder in addFunctions) {
       let element = addFunctions[adder](todo);
       todoElement.appendChild(element);
     }
-    let checkbox = this.checkTodo(todoElement);
+    let checkbox = this.createCheckTodo(todo, todoElement);
     todoElement.appendChild(checkbox);
+    this.setChecked(checkbox, todo, todoElement);
     return todoElement;
   }
 }
